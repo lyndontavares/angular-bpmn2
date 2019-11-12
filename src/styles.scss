@@ -1,0 +1,16 @@
+@import "spinner.scss";
+
+
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+
+
+// Adjust your logo position
+.mat-icon {
+    &.mat-icon-logo {
+      position: relative;
+      top: -2px;
+    }
+}
+
+

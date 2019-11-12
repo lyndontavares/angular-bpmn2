@@ -1,0 +1,145 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+
+  <td-layout-manage-list #manageList [opened]="media.registerQuery('gt-sm') | async" [mode]="(media.registerQuery('gt-sm') | async) ? 'side' :  'over'"
+  [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '257px' : '100%'">
+   
+  <mat-toolbar td-sidenav-content>
+      <mat-icon class="push-left-xs">insert_chart</mat-icon>
+      <span class="push-left">Gráficos</span>
+    </mat-toolbar>
+
+  <mat-nav-list td-sidenav-content [tdLayoutManageListClose]="!media.query('gt-sm')">
+     
+    <h3 matSubheader>Seleccione tipo</h3>
+    <a mat-list-item (click)="graficoHoje()" ><mat-icon matListIcon>insert_chart</mat-icon>Movimientos de Hoy</a>
+    <a mat-list-item (click)="graficoMes()"  ><mat-icon matListIcon>insert_chart</mat-icon>Movimientos del mes actual</a>
+    <a mat-list-item (click)="graficoAno()" ><mat-icon matListIcon>insert_chart</mat-icon>Movimientos del año actual</a>
+ 
+    </mat-nav-list>
+
+    <div>
+      
+    <mat-toolbar>
+				<div layout="row" layout-align="start center" flex>
+					<button mat-icon-button tdLayoutManageListOpen [hideWhenOpened]="true">
+              <mat-icon>arrow_back</mat-icon>
+         </button>
+					<!-- <span>Users</span> -->
+					<span flex></span>
+					<!-- <button routerLink="/form" mat-raised-button color="primary" class="text-upper">Create</button> -->
+				</div>
+			</mat-toolbar>
+
+  <mat-card flex>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle>Cantidad de documentos pendientes, aprobados y cancelados</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+     
+      <!-- <mat-tab-group mat-stretch-tabs dynamicHeight>
+          <mat-tab>
+           <ng-template matTabLabel>Demo</ng-template> -->
+
+          <td-chart [style.height]="'70vh'">
+            <td-chart-toolbox
+                        [show]="true"
+                        [right]="30"
+                        [top]="10"
+                        [feature]="{dataView: {readOnly: true, title: 'View Data', lang: ['Data View', 'Turn Off', 'Refresh']},
+                                    dataZoom: {title: {zoom: 'Zoom', back: 'Back'}},
+                                    magicType: {type: ['line', 'bar', 'stack', 'tiled'], 
+                                                title: {line: 'Line', bar: 'Bar', stack: 'Stack', tiled: 'Tiled'}},
+                                    restore: {title: 'Restore'}}">
+              <ng-template tdViewDataFormatter>
+                <table td-data-table>
+                  <thead>
+                    <tr td-data-table-column-row>
+                      <th td-data-table-column>Category</th>
+                      <th td-data-table-column>{{config.series[0].name}}</th>
+                      <th td-data-table-column>{{config.series[1].name}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let item of ['Pendientes', 'Aprobados', 'Cancelados']; let i = index">
+                      <tr td-data-table-row>
+                        <td td-data-table-cell>{{item}}</td>
+                        <td td-data-table-cell *ngIf="[150, 130, 150] as firstSeries">
+                          {{firstSeries[i]}}
+                        </td>
+                        <td td-data-table-cell *ngIf="[80, 122, 80] as secondSeries">
+                          {{secondSeries[i]}}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </ng-template>
+            </td-chart-toolbox>
+            <td-chart-tooltip [trigger]="'item'"
+                              [textStyle]="{ color: '#818181' }"
+                              [backgroundColor]="'#ffffff'">
+              <ng-template let-params let-ticket="ticket" tdTooltipFormatter>
+                <ng-container *ngIf="params">
+                  <div layout="row" layout-align="start center">
+                    <!-- <mat-icon>
+                      <span [style.color]="params.color">people</span>
+                    </mat-icon> -->
+                    <span class="mat-caption pad-left-sm">
+                      {{params.seriesName + ': ' + params.value}}
+                    </span>
+                  </div>
+                </ng-container>
+              </ng-template>
+            </td-chart-tooltip>
+            <td-chart-x-axis [show]="true"
+                              [position]="'bottom'"
+                              [type]="'category'"
+                              [data]="['Aprobados', 'Pendientes', 'Cancelados']"
+                              [boundaryGap]="true">
+            </td-chart-x-axis>
+            <td-chart-y-axis [show]="true"
+                              [type]="'value'"
+                              [position]="'right'"
+                              [max]="maximo"
+                              [splitLine]="{ lineStyle: { type: 'dotted' } }">
+            </td-chart-y-axis>
+            <td-chart-series td-bar
+                            [data]="dadosHoje"
+                            [name]="'Hoy'"
+                            [color]="'#F2724B'">
+            </td-chart-series>
+            <td-chart-series td-bar
+                            [data]="dadosOntem"
+                            [name]="'Ontem'"
+                            [markLine]="{ data: [{ name: 'Average', value: 30, xAxis: 1, yAxis: 30 }] }"
+                            [color]="'#3A4950'">
+            </td-chart-series>
+          </td-chart>
+
+ 
+
+          <!-- </mat-tab>
+      </mat-tab-group> -->
+
+    </mat-card-content>
+  </mat-card>
+
+
+</div>
+
+
+</td-layout-manage-list>
+
+
+<td-layout-footer>
+    <div layout="row" layout-align="start center">
+      <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+    </div>
+</td-layout-footer>
+
+ </td-layout-nav>

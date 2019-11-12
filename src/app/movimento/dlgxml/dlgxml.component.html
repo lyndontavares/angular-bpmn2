@@ -1,0 +1,33 @@
+<div  layout="row" layout-padding layout-align="center center">
+  <h1 mat-dialog-title >XML</h1>
+</div>
+
+<div mat-dialog-content>
+
+    <div class="example-container">
+      
+        <div align="center">
+            <mat-spinner *ngIf="!mostrar"  ></mat-spinner>
+        </div>  
+    
+    
+      <mat-form-field flex=100 *ngIf="mostrar">
+          <textarea #texto 
+            matInput 
+            placeholder=""  
+            [(ngModel)]="data"  
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="24"
+            readonly
+          ></textarea>
+      </mat-form-field>
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button   (click)="onClose()" >Salir</button> 
+  <!-- mat-dialog-close -->
+</div> 

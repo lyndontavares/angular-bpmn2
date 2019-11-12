@@ -1,0 +1,32 @@
+	<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+		<button mat-icon-button td-menu-button tdLayoutToggle>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <td-layout-card-over 
+      cardTitle="Criar Processo" 
+      cardSubtitle="diagrama de processo BMPN"
+      cardWidth="100">
+			<mat-card-content>
+			</mat-card-content>
+
+      <button mat-button (click)="load()">Abrir <i class="fa fa-folder-open"></i></button>
+      <button mat-button (click)="save()">Salvar <i class="fa fa-save"></i></button>
+      
+      <div class="modeler">
+        <div id="canvas"></div>
+        <div id="properties"></div>
+      </div>
+ 
+      
+      <mat-card-actions>
+      </mat-card-actions>
+
+    </td-layout-card-over>
+    
+    <td-layout-footer>
+        <div layout="row" layout-align="start center">
+          <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+        </div>
+   </td-layout-footer>
+
+	</td-layout-nav>

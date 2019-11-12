@@ -1,0 +1,100 @@
+import {NgModule} from '@angular/core';
+
+import {
+  MatButtonModule, 
+  MatListModule, 
+  MatIconModule, 
+  MatCardModule, 
+  MatMenuModule, 
+  MatInputModule, 
+  MatButtonToggleModule,
+  MatProgressSpinnerModule, 
+  MatSelectModule, 
+  MatSlideToggleModule, 
+  MatDialogModule, 
+  MatSnackBarModule, 
+  MatToolbarModule,
+  MatTabsModule, 
+  MatSidenavModule, 
+  MatTooltipModule, 
+  MatRippleModule, 
+  MatRadioModule, 
+  MatGridListModule,
+  MatDatepickerModule, 
+  MatNativeDateModule, 
+  MatSliderModule, 
+  MatAutocompleteModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCheckboxModule,
+  MatSortModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS
+
+} from '@angular/material';
+
+@NgModule({
+  imports: [
+    MatButtonModule, 
+    MatListModule, 
+    MatIconModule, 
+    MatCardModule, 
+    MatMenuModule, 
+    MatInputModule, 
+    MatButtonToggleModule,
+    MatProgressSpinnerModule, 
+    MatSelectModule, 
+    MatSlideToggleModule, 
+    MatDialogModule, 
+    MatSnackBarModule, 
+    MatToolbarModule,
+    MatTabsModule, 
+    MatSidenavModule, 
+    MatTooltipModule, 
+    MatRippleModule, 
+    MatRadioModule, 
+    MatGridListModule,
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    MatSliderModule, 
+    MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatSortModule
+  ],
+  exports: [
+    MatButtonModule, 
+    MatListModule, 
+    MatIconModule, 
+    MatCardModule, 
+    MatMenuModule, 
+    MatInputModule, 
+    MatButtonToggleModule,
+    MatProgressSpinnerModule, 
+    MatSelectModule, 
+    MatSlideToggleModule, 
+    MatDialogModule, 
+    MatSnackBarModule, 
+    MatToolbarModule,
+    MatTabsModule, 
+    MatSidenavModule, 
+    MatTooltipModule, 
+    MatRippleModule, 
+    MatRadioModule, 
+    MatGridListModule,
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    MatSliderModule, 
+    MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatSortModule
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+  ]
+})
+
+export class MaterialModule {
+}

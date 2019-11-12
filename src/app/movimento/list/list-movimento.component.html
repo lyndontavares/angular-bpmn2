@@ -1,0 +1,79 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <td-layout-card-over 
+    cardTitle="Documentos Electrónicos" 
+    cardSubtitle="Consulte los movimientos de Documentos Eletrónicos generados por la ApiDFE"
+    cardWidth="90">
+    <mat-card-content>
+
+      <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" >
+              <button mat-icon-button   (click)="listAll()"  color="primary" ><mat-icon>refresh</mat-icon></button>
+              <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Filtro" (searchDebounce)="applyFilter($event)" flex>
+              </td-search-box>
+         </div>
+         
+         <mat-divider></mat-divider> 
+ 
+          <mat-table  #table [dataSource]="dataSource" matSort class="mat-cell">
+
+            <ng-container matColumnDef="id" >
+              <mat-header-cell  *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="cdc">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>CDC</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row.cdc}}</mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="updatedDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row?.updatedDate | date: 'dd/MM/yy HH:mm' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="emailEnviado">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Email Enviado</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row?.emailEnviado ?'Si' : 'No' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="situacao">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Situación</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row.situacao}}</mat-cell>
+            </ng-container>
+
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef >Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row"  >
+                <button mat-icon-button matTooltip="abrir XML" (click) = "imprimirXML(row.cdc)" ><mat-icon svgIcon="file-xml"></mat-icon></button>
+                <div style="padding: 5px"></div> 
+                <button mat-icon-button matTooltip="abrir kude" (click) = "imprimirKude(row.cdc)"><mat-icon svgIcon="file-pdf"></mat-icon></button>
+                <div style="padding: 5px"></div> 
+                <button mat-icon-button matTooltip="enviar email" (click) = "enviarEmail(row.cdc)"><mat-icon>mail</mat-icon></button>
+                <div style="padding: 5px"></div> 
+                <button mat-icon-button matTooltip="enviar sifen" (click) = "enviarSifen(row)"><mat-icon>cloud_upload</mat-icon></button>
+            </mat-cell>
+          </ng-container> 
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        
+        <mat-paginator  [pageSize]="5" [pageSizeOptions]="[5,10, 20]"></mat-paginator>
+
+    </mat-card-content>
+    <mat-divider></mat-divider> 
+    <mat-card-actions>
+      <button mat-button routerLink="/dashboard"matTooltip="Salir (esc)">Salir</button>
+    </mat-card-actions> 
+  </td-layout-card-over>
+
+  <td-layout-footer>
+      <div layout="row" layout-align="start center">
+        <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+      </div>
+ </td-layout-footer>
+
+</td-layout-nav>

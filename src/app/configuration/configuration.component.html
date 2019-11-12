@@ -1,0 +1,247 @@
+<td-layout-nav logo="assets:logo-white" [toolbarTitle]="" navigationRoute="/dashboard">
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <span flex></span>
+  </div>
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <!-- <span flex></span>
+    <a mat-icon-button matTooltip="Docs" matTooltipPosition="before" href="https://teradata.github.io/covalent/"
+      target="_blank">
+      <mat-icon>chrome_reader_mode</mat-icon>
+    </a> -->
+  </div>
+  <td-layout-card-over cardTitle="Configuraciones Generales"
+    cardSubtitle="Vea y actualize las configuraciones generales de la ApiDFE"
+    cardWidth="90">
+<!-- 
+      <mat-card-content>
+        <td-breadcrumbs>
+            <a td-breadcrumb
+                [routerLink]="['/dashboard']"
+                >Dashboard</a>
+            <td-breadcrumb>Current</td-breadcrumb>
+          </td-breadcrumbs>
+      </mat-card-content> -->
+
+      <mat-card-content>
+      <form *ngIf="configFormGroup" [formGroup]="configFormGroup" class="form">
+
+      <td-steps>
+
+        <td-step [state]="state1" #step1 label="Datos Generales" sublabel="Secuencia, Ambiente, Sincronización, Server logs" active="true" >
+
+
+            <div layout-gt-xs="row">
+                <mat-form-field flex>
+                  <input matInput appAutofocus class="form-control" placeholder="Secuencia de envio" formControlName="sequenciaEnvio">
+                  <mat-error>
+                    {{configFormGroup.controls.sequenciaEnvio.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                  <mat-label>Ambiente</mat-label>
+                  <mat-select class="form-control" placeholder="Ambiente" formControlName="ambiente">
+                    <mat-option *ngFor="let amb of ['prova','producao']" [value]="amb">
+                      {{amb}}
+                    </mat-option>
+                    <mat-error>
+                      {{configFormGroup.controls.ambiente.errorMessage}}
+                    </mat-error>
+                  </mat-select>
+                </mat-form-field>
+    
+              </div>
+    
+              <div layout-gt-xs="row">
+                <mat-form-field flex >
+                  <input matInput class="form-control" placeholder="Codigo de Seguridad SIFEN (CSC)" formControlName="csc">
+                  <mat-error>
+                    {{configFormGroup.controls.csc.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+              <div layout-gt-xs="row">
+                <mat-form-field flex >
+                  <input matInput class="form-control" placeholder="Link de la página de consulta del SIFEN"
+                    formControlName="qrlink">
+                  <mat-error>
+                    {{configFormGroup.controls.qrlink.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+              <div layout-gt-xs="row">
+                <mat-checkbox formControlName="ativarSincronizacao" (change)="ativarSincronizacao()">¿Activar
+                  Sincronización?
+                </mat-checkbox>
+              </div>
+    
+              <div layout-gt-xs="row">
+                <mat-form-field flex>
+                  <input matInput class="form-control" placeholder="Periodo Sincronización SIFEN"
+                    formControlName="intervaloChecagemRecebimento">
+                  <mat-error>
+                    {{configFormGroup.controls.intervaloChecagemRecebimento.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field flex-offset="5" flex>
+                  <input matInput class="form-control" placeholder="Periodo Sincronización E-mail"
+                    formControlName="intervaloEnvioEmails">
+                  <mat-error>
+                    {{configFormGroup.controls.intervaloEnvioEmails.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div layout-gt-xs="row">
+                <mat-form-field flex>
+                  <input matInput class="form-control" placeholder="Mensaje e-mail al receptor del DE"
+                    formControlName="mensagemEnvioEmails">
+                  <mat-error>
+                    {{configFormGroup.controls.mensagemEnvioEmails.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div layout-gt-xs="row">
+                <mat-form-field flex>
+                  <input matInput class="form-control" placeholder="Local Server Logs"
+                    formControlName="logdir">
+                  <mat-error>
+                    {{configFormGroup.controls.logdir.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+        </td-step>
+
+
+        <td-step [state]="state2" #step1 label="Email Server" sublabel="Host, Port, SSL, Auth, User, Password"   >
+          
+            <div layout-gt-xs="row">
+              <mat-form-field flex>
+                <input matInput class="form-control" placeholder="Host" #host required name="host" formControlName="emailHost">
+                <mat-error>
+                  {{configFormGroup.controls?.host?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field flex>
+                <input matInput class="form-control" placeholder="Port" #host required name="port" formControlName="emailPort">
+                <mat-error>
+                  {{configFormGroup.controls?.port?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div layout-gt-xs="row">
+              <mat-form-field flex>
+                <input matInput class="form-control" placeholder="SSL" #host required name="ssl" formControlName="emailSslSocketFactory">
+                <mat-error>
+                  {{configFormGroup.controls?.ssl?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field flex>
+                <input matInput class="form-control" placeholder="Auth" #host required name="auth"  formControlName="emailAuth">
+                <mat-error>
+                  {{configFormGroup.controls?.auth?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div layout-gt-xs="row">
+              <mat-form-field flex>
+                <input matInput class="form-control" placeholder="User" #host required name="username" formControlName="emailUsername">
+                <mat-error>
+                  {{configFormGroup.controls?.username?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field flex>
+                <input [type]="showPassword" matInput class="form-control" placeholder="password" #host required name="password" formControlName="emailPassword">
+                <mat-icon matSuffix (click)="onShowPassword()">{{icon}}</mat-icon>
+                <mat-error>
+                  {{configFormGroup.controls?.password?.errorMessage}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+        </td-step>
+
+
+        <td-step [state]="state3" #step1 label="Licenciameto" sublabel="Email, Password, Nombre, Unidade, Token"   >
+          
+          <div layout-gt-xs="row">
+            <mat-form-field flex>
+              <input matInput class="form-control" placeholder="Email" #host required name="email" formControlName="apiEmail">
+              <mat-error>
+                {{configFormGroup.controls?.apiEmail?.errorMessage}}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field flex>
+              <mat-icon matSuffix (click)="onShowApiPassword()">{{icon2}}</mat-icon>
+              <input [type]="showApiPassword" matInput class="form-control" placeholder="Contraseña" #host required name="password" formControlName="apiSenha">
+              <mat-error>
+                {{configFormGroup.controls?.port?.errorMessage}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div layout-gt-xs="row">
+            <mat-form-field flex>
+              <input matInput class="form-control" placeholder="Nombre Cliente" #host required name="cliente" formControlName="apiCliente">
+              <mat-error>
+                {{configFormGroup.controls?.cliente?.errorMessage}}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field flex>
+              <input matInput class="form-control" placeholder="Unidade Processamiento" #host required name="unidade"  formControlName="apiUnidade">
+              <mat-error>
+                {{configFormGroup.controls?.unidade?.errorMessage}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+<!-- 
+          <div layout-gt-xs="row">
+            <mat-form-field flex>
+              <input matInput class="form-control" placeholder="Token Licenciamento" #host required name="token" formControlName="apiToken">
+              <mat-error>
+                {{configFormGroup.controls?.token?.errorMessage}}
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+          
+      </td-step>
+
+
+
+      </td-steps>
+
+    </form>
+
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" matTooltip="Grabar (F6)" [disabled]="!configFormGroup.valid" class="button"
+        (click)="updateConfig()">Grabar</button>
+
+      <button mat-button  routerLink="/dashboard"   matTooltip="Salir (esc)" >Salir</button>
+    </mat-card-actions>
+  </td-layout-card-over>
+
+  <td-layout-footer>
+      <div layout="row" layout-align="start center">
+        <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+      </div>
+ </td-layout-footer>
+
+</td-layout-nav>

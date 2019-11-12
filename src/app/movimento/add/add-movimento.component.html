@@ -1,0 +1,60 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <td-layout-card-over 
+    cardTitle="{{title}}" 
+    cardSubtitle=""
+    cardWidth="90">
+    <mat-card-content>
+
+          <td-breadcrumbs>
+            <a td-breadcrumb
+                [routerLink]="['/dashboard']"
+                >Dashboard</a>
+            <a td-breadcrumb
+                [routerLink]="['/movimento']"
+                >Movimiento</a>
+            <td-breadcrumb>Current</td-breadcrumb>
+          </td-breadcrumbs>
+
+          <form *ngIf="fg" [formGroup]="fg" class="form">
+
+              <div layout-gt-xs="row">
+
+                <mat-form-field flex>
+                    <input matInput class="form-control" placeholder="Id" formControlName="id" >
+                    <mat-error>
+                      {{fg.controls.id.errorMessage}}
+                    </mat-error>
+                </mat-form-field>  
+    
+                <mat-form-field flex flex-offset="5" >
+                  <input matInput class="form-control" placeholder="CDC" formControlName="cdc">
+                  <mat-error>
+                    {{fg.controls.cdc.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+              <div layout-gt-xs="row">
+
+                <mat-form-field flex>
+                  <input matInput class="form-control" placeholder="Situación" formControlName="situacao">
+                  <mat-error>
+                    {{fg.controls.situacao.errorMessage}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+          </form>
+
+
+    </mat-card-content>
+    <mat-divider></mat-divider> 
+    <mat-card-actions>
+      <button mat-button color="accent" matTooltip="Grabar (F6)" (click)="updateUser($event)" [disabled]="!fg.valid" >Grabar</button>
+      <button mat-button routerLink="/users" matTooltip="Salir (esc)">Salir</button>
+    </mat-card-actions> 
+  </td-layout-card-over>
+</td-layout-nav>

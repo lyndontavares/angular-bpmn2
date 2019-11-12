@@ -1,0 +1,47 @@
+	<td-layout-nav logo="assets:logo-white" [toolbarTitle]="" navigationRoute="/dashboard">
+		<button mat-icon-button td-menu-button tdLayoutToggle>
+      <mat-icon>menu</mat-icon>
+		</button>
+		
+		<div td-toolbar-content layout="row" layout-align="start center" flex>
+			<span flex></span>
+		</div>
+
+		<div flex>
+			<div class="bgc-blue-900 pad-xl">
+				<div layout="row" layout-align="start center">
+					<span hide-xs><img src="./assets/responsive.svg" width="100px" style="padding: 5px"/></span>
+					<!-- <mat-icon svgIcon="assets:logo" style="width:128px;height:128px;" class="push-right"></mat-icon> -->
+					<div>
+						<h1 class="mat-display-2 tc-blue-grey-50 push-bottom-none">BPMN Modeler</h1>
+						<h2 class="mat-display-1 tc-white push-bottom-none">proof of concept</h2>
+					</div>
+				</div>
+			</div>
+
+			<div layout="row"  layout-wrap>
+				<ng-template let-item let-index="index" [ngForOf]="overviewMenu" ngFor> 
+					<div class="fav-list-item" flex-gt-xs="50" flex="100">
+						<mat-card href class="mat-card-colored">
+							<mat-toolbar [ngClass]="'bgc-' + item.color" layout="column" layout-align="center center" layout-padding [routerLink]="[item.route]">
+								<mat-icon>{{item.icon}}</mat-icon>
+							</mat-toolbar>
+							<div class="card-content" [routerLink]="[item.route]">
+								<div layout="column" layout-padding>
+									<div class="mat-subheading-2 text-truncate push-none" [matTooltip]="item.title" matTooltipShowDelay="1000">{{item.title}}</div>
+									<div class="mat-caption tc-grey-600 text-truncate" [title]="item.description"> {{item.description}} </div>
+								</div>
+							</div>
+						</mat-card>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+
+		<td-layout-footer>
+        <div layout="row" layout-align="start center">
+          <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+        </div>
+   </td-layout-footer>
+	
+	</td-layout-nav>

@@ -1,0 +1,108 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+
+  <td-layout-manage-list #manageList [opened]="media.registerQuery('gt-sm') | async" [mode]="(media.registerQuery('gt-sm') | async) ? 'side' :  'over'"
+  [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '257px' : '100%'">
+   
+  <mat-toolbar td-sidenav-content>
+      <mat-icon class="push-left-xs">bug_report</mat-icon>
+      <span class="push-left">Server Logs</span>
+    </mat-toolbar>
+
+  <mat-nav-list td-sidenav-content [tdLayoutManageListClose]="!media.query('gt-sm')">
+     
+			<!-- <a mat-icon-button matTooltip="Sincronizar informaciónes" matTooltipPosition="before"
+				 [@tdRotate]="{ value: triggerState, params: { duration: 500, degreesEnd: 360 }}" (click)="sincronizar()">  -->
+					<!-- href="https://teradata.github.io/covalent/" target="_blank" -->
+				<!-- <mat-icon>sync</mat-icon>
+			</a> -->
+
+    <h3 matSubheader> 
+      
+        <a mat-icon-button 
+        [@tdRotate]="{ value: triggerState, params: { duration: 500, degreesEnd: 360 }}" (click)="listarArquivos()"> 
+        <mat-icon>sync</mat-icon>
+        </a>
+      
+        Sincronizar Archivos de Log</h3>
+
+    <ng-container *ngFor="let arq of arquivos" >
+      <a mat-list-item (click)="carregarArquivo(arq)"><mat-icon matListIcon>insert_drive_file</mat-icon>{{arq}}</a>
+    </ng-container>
+
+ 
+
+    <!--      
+      <ng-template let-item let-last="last" ngFor [ngForOf]="mgmtmenu">
+        <a mat-list-item>
+          <mat-icon matListIcon>{{item.icon}}</mat-icon> {{item.title}}
+        </a>
+      </ng-template>
+      <h3 matSubheader>Monitor</h3>
+      <ng-template let-item let-last="last" ngFor [ngForOf]="monitormenu">
+        <a mat-list-item>
+          <mat-icon matListIcon>{{item.icon}}</mat-icon> {{item.title}}
+        </a>
+      </ng-template>
+      <h3 matSubheader>Settings</h3>
+      <ng-template let-item let-last="last" ngFor [ngForOf]="settingsmenu">
+        <a mat-list-item>
+          <mat-icon matListIcon>{{item.icon}}</mat-icon> {{item.title}}
+        </a>
+      </ng-template> -->
+    </mat-nav-list>
+    <div>
+    <mat-toolbar>
+				<div layout="row" layout-align="start center" flex>
+					<button mat-icon-button tdLayoutManageListOpen [hideWhenOpened]="true">
+              <mat-icon>arrow_back</mat-icon>
+         </button>
+					<!-- <span>Users</span> -->
+					<span flex></span>
+					<!-- <button routerLink="/form" mat-raised-button color="primary" class="text-upper">Create</button> -->
+				</div>
+			</mat-toolbar>
+
+  <mat-card flex>
+    <mat-card-title>Archivos de Log</mat-card-title>
+    <mat-card-subtitle>Contenido del archivo de log: {{nomeArquivo}}</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+     
+    <div class="example-container">
+      <mat-form-field style="">
+          <textarea 
+            matInput 
+            placeholder=""  
+            [(ngModel)]="arquivo"  
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="35"
+            readonly
+          ></textarea>
+      </mat-form-field>
+    </div>
+
+    </mat-card-content>
+  </mat-card>
+
+
+</div>
+
+
+</td-layout-manage-list>
+
+
+<td-layout-footer>
+    <div layout="row" layout-align="start center">
+      <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+    </div>
+</td-layout-footer>
+
+
+ </td-layout-nav>

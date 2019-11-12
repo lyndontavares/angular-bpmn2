@@ -1,0 +1,63 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <td-layout-card-over 
+    cardTitle="Carga Logo Kude" 
+    cardSubtitle="Cargue el logo que será utilizado en el KuDE (Representación gráfica del Documento Electrónico)"
+    cardWidth="90">
+    <mat-card-content>
+        <!-- <td-breadcrumbs>
+            <a td-breadcrumb
+                [routerLink]="['/dashboard']"
+                >Dashboard</a>
+            <td-breadcrumb>Current</td-breadcrumb> <div layout-gt-xs="row"></div>
+          </td-breadcrumbs> -->
+          <img *ngIf="config?.imagem" src="data:image/gif;base64,{{config?.imagem}}" width="400px"/>
+    </mat-card-content>
+  
+    <mat-card-content>
+        <!-- <p>Imagem selecionada: {{fileSelectMsg}}</p>
+        <p>Imagem upload: {{fileUploadMsg}}</p>
+        <br/> -->
+       
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+
+        <div layout="row">
+
+          <td-file-upload 
+          #singleFileUpload 
+          [(ngModel)]="file" 
+          (select)="selectEvent($event)" 
+          (upload)="uploadEvent($event)" 
+          (cancel)="cancelEvent()" 
+          required>
+          <mat-icon>file_upload</mat-icon>
+          <span>{{ singleFileUpload.value?.name }}</span>
+          <ng-template td-file-input-label>
+            <mat-icon>attach_file</mat-icon>
+            <span>
+              Seleccione un archivo...
+            </span>
+              <span [hidden]="!singleFileUpload?.required">*</span>
+          </ng-template>
+          </td-file-upload>
+
+          <button mat-button routerLink="/dashboard"  matTooltip="Salir (esc)">Salir</button>
+
+        </div>
+
+    </mat-card-actions>
+
+  </td-layout-card-over>
+
+  <td-layout-footer>
+      <div layout="row" layout-align="start center">
+        <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+      </div>
+ </td-layout-footer>
+
+</td-layout-nav>

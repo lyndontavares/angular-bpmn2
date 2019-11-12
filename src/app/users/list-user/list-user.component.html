@@ -1,0 +1,80 @@
+<td-layout-nav navigationRoute="/dashboard" logo="assets:logo-white" >
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <td-layout-card-over 
+    cardTitle="Configuraciones de Usuarios" 
+    cardSubtitle="Vea y actualize datos relacionados a los usuarios"
+    cardWidth="90">
+    <mat-card-content>
+
+          <!-- <td-breadcrumbs>
+            <a td-breadcrumb
+                [routerLink]="['/dashboard']"
+                >Dashboard</a>
+            <td-breadcrumb>Current</td-breadcrumb>
+          </td-breadcrumbs> -->
+
+          <!-- <mat-divider></mat-divider>  -->
+          <div layout="row" layout-align="start center"  class="pad-left-sm pad-right-sm" >
+              <button mat-icon-button   (click)="listAll()"  color="primary" ><mat-icon>refresh</mat-icon></button>
+              <button mat-icon-button   routerLink="/users/add" color="primary" ><mat-icon>person_add</mat-icon></button>
+              <td-search-box #searchBox class="push-right-sm" placeholder="Filtro" (searchDebounce)="applyFilter($event)" flex>
+              </td-search-box>
+         </div>
+         <mat-divider></mat-divider> 
+
+          <mat-table  #table [dataSource]="dataSource" matSort class="mat-cell">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="login">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row.username}}</mat-cell>
+            </ng-container>
+            
+            <!-- ID Column -->
+            <ng-container matColumnDef="alias">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Alias</mat-header-cell>
+              <mat-cell *matCellDef="let row" >{{row.alias}}</mat-cell>
+            </ng-container>
+
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef >Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row"  >
+      
+            <button  mat-icon-button matTooltip="Editar" routerLink="/users/edit/{{row.id}}">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <div style="padding: 5px"></div> 
+            <button mat-icon-button matTooltip="Deletar"   (click)="delete(row)">
+                  <mat-icon>delete</mat-icon>
+            </button>
+            <div style="padding: 5px"></div> 
+            <button mat-icon-button matTooltip="Contraseña"   (click)="updateSenha(row)">
+                <mat-icon>lock</mat-icon>
+            </button>
+
+          </mat-cell>
+          </ng-container> 
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator  [pageSize]="5" [pageSizeOptions]="[5,10, 20]"></mat-paginator>
+
+    </mat-card-content>
+    <mat-divider></mat-divider> 
+    <mat-card-actions>
+      <!-- <button mat-button routerLink="/users" color="accent" class="text-upper">Save</button> -->
+      <button mat-button routerLink="/dashboard" matTooltip="Saloe (esc)" >Salir</button>
+    </mat-card-actions> 
+  </td-layout-card-over>
+
+  <td-layout-footer>
+      <div layout="row" layout-align="start center">
+        <span class="mat-caption">Datapar S.A. &copy; 2019 - Reservados todos los derechos</span>
+      </div>
+ </td-layout-footer>
+
+</td-layout-nav>
